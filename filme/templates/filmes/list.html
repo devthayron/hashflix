@@ -9,7 +9,9 @@ HomeFilmes Hashflix
 
 {% for filme in filmes %}
     <p>{{ filme }}</p>
+    <a href="{% url 'filmes:detail' filme.pk %}">
+        <img src="{{ filme.thumb.url }}" alt="{{ filme }}">
+        </a>
     <p>{{ filme.descricao }}</p>
-    <img src="{{ filme.thumb.url }}" alt=""></img>
 {% endfor %}
 {% endblock  %}
