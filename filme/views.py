@@ -1,11 +1,16 @@
 from django.shortcuts import render
 from .models import Filme
-from django.views.generic import TemplateView,ListView
+from django.views.generic import TemplateView,ListView,DetailView
 
-class Homepage(TemplateView):
-    template_name = 'homepage.html'
+class HomePageView(TemplateView):
+    template_name = 'core/homepage.html'
 
-class Homefilmes(ListView):
-    template_name = 'homefilmes.html'
+class FilmeListView(ListView):
+    template_name = 'filmes/list.html'
     model = Filme
     context_object_name = 'filmes'
+
+class FilmeDetailView(DetailView):
+    template_name = 'filmes/detail.html'
+    model = Filme
+    context_object_name = 'filme'
