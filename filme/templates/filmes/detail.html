@@ -17,4 +17,13 @@ Detalhe Hashflix
         <p>Episodio: {{ forloop.counter }} {{ episodio.titulo }}</p>
         </a>
     {% endfor %}
+
+    <h2>Filmes Relacionados</h2>
+    {% for filme in filmes_relacionados %}
+    <p>
+        <a href="{% url 'filme:detail' filme.pk %}">
+            {{ filme.titulo }}
+        </a>
+    </p>
+    {% endfor %}
 {% endblock  %}
