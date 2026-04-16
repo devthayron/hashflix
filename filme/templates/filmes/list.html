@@ -7,11 +7,22 @@ HomeFilmes Hashflix
 {% block content %}
 <h1>home filmes</h1>
 
+<h2>lista de filmes</h2>
 {% for filme in filmes %}
     <p>{{ filme }}</p>
     <a href="{% url 'filmes:detail' filme.pk %}">
         <img src="{{ filme.thumb.url }}" alt="{{ filme }}">
         </a>
     <p>{{ filme.descricao }}</p>
-{% endfor %}
+    {% endfor %}
+
+    <h2>Novo</h2>
+    {% for filme in lista_filmes_recentes %}
+    <p>{{ filme }}</p>
+    {% endfor %}
+
+    <h2>Filmes em alta</h2>
+    {% for filme in lista_filmes_em_alta %}
+    <p>{{ filme }}</p>
+    {% endfor %}
 {% endblock  %}
