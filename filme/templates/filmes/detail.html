@@ -9,6 +9,7 @@ Detalhe Hashflix
     
     <p>{{ filme }}</p>
     <p>{{ filme.descricao }}</p>
+    <p>Vizualizações: {{ filme.visualizacoes }}</p>
     <img src="{{ filme.thumb.url }}" alt="imagem de {{ filme }}">
 
     <h2>Episodios</h2>
@@ -21,7 +22,7 @@ Detalhe Hashflix
     <h2>Filmes Relacionados</h2>
     {% for filme in filmes_relacionados %}
     <p>
-        <a href="{% url 'filme:detail' filme.pk %}">
+        <a href="{% url 'filmes:detail' filme.pk %}">
             {{ filme.titulo }}
         </a>
     </p>

@@ -18,11 +18,11 @@ HomeFilmes Hashflix
 
     <h2>Novo</h2>
     {% for filme in lista_filmes_recentes %}
-    <p>{{ filme }}</p>
+    <p>{{ filme }} (data de criação: {{ filme.data_criacao }})</p>
     {% endfor %}
 
     <h2>Filmes em alta</h2>
     {% for filme in lista_filmes_em_alta %}
-    <p>{{ filme }}</p>
+    <p>{{ filme }} (visualizações: {{ filme.visualizacoes }})</p>
     {% endfor %}
 {% endblock  %}
