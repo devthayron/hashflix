@@ -10,6 +10,7 @@ class FilmeListView(ListView):
     model = Filme
     context_object_name = 'filmes'
 
+    # função que serve para adicionar dados extras no template
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['lista_filmes_recentes'] = get_lista_filmes_recentes()
