@@ -1,0 +1,65 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #000;
+}
+
+h1 {
+  font-family: Arial;
+  color: red;
+  text-align: center;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 100%);
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.wrapper section {
+  width: 100%;
+  position: relative;
+  margin: 20px 0;
+}
+
+.wrapper section .item {
+  padding: 0 2px;
+  transition: 250ms all;
+}
+
+.wrapper section .item:hover {
+  margin: 0 40px;
+  transform: scale(1.2);
+}
+
+.wrapper section a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 6em;
+  background: rgb(0, 0, 0);
+  text-align: center;
+  z-index: 1;
+}
+
+.wrapper section > a:first-child {
+  position: absolute;
+  left: 0;
+  background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+}
+
+.wrapper section > a:last-child {
+  position: absolute;
+  right: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+}
+
+/* Remove arrow mobile */
+@media only screen and (max-width: 600px) {
+  a.arrow__btn {
+    display: none;
+  }
+}
