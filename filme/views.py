@@ -3,7 +3,7 @@ from django.views.generic import TemplateView,ListView,DetailView
 from .service import get_filmes_relacionados,get_lista_filmes_recentes,get_lista_filmes_em_alta,incrementar_visualizacoes
 
 class HomePageView(TemplateView):
-    template_name = 'core/homepage.html'
+    template_name = 'filmes/homepage.html'
 
 class FilmeListView(ListView):
     template_name = 'filmes/list.html'
