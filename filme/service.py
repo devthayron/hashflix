@@ -19,3 +19,7 @@ def get_lista_filmes_em_alta(limite=8):
 # evita race condition (duas requisições sobrescrevendo o mesmo valor)
 def incrementar_visualizacoes(filme):
     return Filme.objects.filter(id=filme.id).update(visualizacoes=F('visualizacoes') + 1)
+
+def filme_destaque():
+    # filme mais recente é o destaque
+    return get_lista_filmes_recentes().first()

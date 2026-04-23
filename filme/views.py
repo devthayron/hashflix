@@ -1,6 +1,6 @@
 from .models import Filme
 from django.views.generic import TemplateView,ListView,DetailView
-from .service import get_filmes_relacionados,get_lista_filmes_recentes,get_lista_filmes_em_alta,incrementar_visualizacoes
+from .service import get_filmes_relacionados,get_lista_filmes_recentes,get_lista_filmes_em_alta,incrementar_visualizacoes,filme_destaque
 
 class HomePageView(TemplateView):
     template_name = 'filmes/homepage.html'
@@ -15,6 +15,7 @@ class FilmeListView(ListView):
         context = super().get_context_data(**kwargs)
         context['lista_filmes_recentes'] = get_lista_filmes_recentes()
         context['lista_filmes_em_alta'] = get_lista_filmes_em_alta()
+        context['filme_destaque'] = filme_destaque()
         return context
 
 class FilmeDetailView(DetailView):
