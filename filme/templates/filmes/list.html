@@ -41,7 +41,7 @@ Lista de Filmes Hashflix
             <div class="wrapper">
                 <section id="section1" class="flex flex-nowrap items-center justify-center space-x-8">
                 <a href="#section2" class="arrow__btn text-6xl page">‹</a>
-                    {% for filme in lista_filmes_recentes %}
+                    {% for filme in filmes_recentes %}
                     {% if forloop.counter < 5 %}
                     <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filmes:detail' filme.pk %}">
@@ -51,11 +51,11 @@ Lista de Filmes Hashflix
                     {% endif %}
                     {% endfor %}
                     <a href="#section2" class="arrow__btn text-6xl">›</a>
-                    {% if lista_filmes_recentes|length > 4 %}
+                    {% if filmes_recentes|length > 4 %}
                 </section>
                     <section id="section2" class="flex flex-nowrap items-center justify-center">
                     <a href="#section1" class="arrow__btn text-6xl">‹</a>
-                    {% for filme in lista_filmes_recentes %}
+                    {% for filme in filmes_recentes %}
                     {% if forloop.counter > 4 %}
                     <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filmes:detail' filme.pk %}">
@@ -79,7 +79,7 @@ Lista de Filmes Hashflix
             <div class="wrapper">
                 <section id="section1emAlta" class="flex flex-nowrap items-center justify-center space-x-8">
                 <a href="#section2emAlta" class="arrow__btn text-6xl page">‹</a>
-                    {% for filme in lista_filmes_em_alta %}
+                    {% for filme in filmes_em_alta %}
                     {% if forloop.counter < 5 %}
                     <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filmes:detail' filme.pk %}">
@@ -89,11 +89,11 @@ Lista de Filmes Hashflix
                     {% endif %}
                     {% endfor %}
                     <a href="#section2emAlta" class="arrow__btn text-6xl">›</a>
-                    {% if lista_filmes_em_alta|length > 4 %}
+                    {% if filmes_em_alta|length > 4 %}
                 </section>
                     <section id="section2emAlta" class="flex flex-nowrap items-center justify-center">
                     <a href="#section1emAlta" class="arrow__btn text-6xl">‹</a>
-                    {% for filme in lista_filmes_em_alta %}
+                    {% for filme in filmes_em_alta %}
                     {% if forloop.counter > 4 %}
                     <div class="item h-64 w-1/4 m-4">
                         <a href="{% url 'filmes:detail' filme.pk %}">
