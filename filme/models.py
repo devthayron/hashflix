@@ -24,8 +24,17 @@ class FilmeManager(models.Manager):
             )
 
     def filme_destaque(self):
-        return self.filter(destaque=True).order_by('-data_criacao').first()
-    
+        """
+        Se eu n definir o destaque manualmente,
+        o filme mais recente será escolhido como destaque.
+
+        obs. Ainda constará desmarcado o destaque
+        """
+        destaque = (self.filter(destaque=True)
+        .order_by('-data_criacao')
+        .first()
+        )
+        return destaque or self.order_by('-data_criacao').first()
     
 # choices → define opções fixas para um campo
 # formato: (valor_salvo_no_banco, valor_exibido_para_usuario)
@@ -57,7 +66,6 @@ class Filme(models.Model):
         """
         if self.destaque:
             Filme.objects.exclude(pk=self.pk).update(destaque=False)
-
         return super().save(*args, **kwargs)
 
 

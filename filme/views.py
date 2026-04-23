@@ -1,7 +1,6 @@
 from .models import Filme
 from django.views.generic import TemplateView,ListView,DetailView
 
-
 class HomePageView(TemplateView):
     template_name = 'filmes/homepage.html'
 
@@ -9,6 +8,7 @@ class FilmeListView(ListView):
     template_name = 'filmes/list.html'
     model = Filme
     context_object_name = 'filmes'
+
 
     # otimização para evitar consultas adicionais ao acessar os episódios de cada filme
     def get_queryset(self):
