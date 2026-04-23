@@ -17,15 +17,14 @@ class FilmeManager(models.Manager):
         return self.order_by('-visualizacoes')[:limite]
     
     def incrementar_visualizacoes(self, filme_pk):
-      # ao comparar o resultado da atualização com 1, garantimos que o filme existia e foi atualizado corretamente
-      # pois o método update retorna o número de registros afetados, que deve ser 1 para um filme específico
         return (
             self.filter(pk=filme_pk)
-            .update(visualizacoes=F('visualizacoes') + 1) == 1
+            .update(visualizacoes=F('visualizacoes') + 1) 
+            == 1    # Retorna True se exatamente 1 registro foi atualizado
             )
 
     def filme_destaque(self):
-        return self.recentes().first()
+        return self.filter(destaque=True).order_by('-data_criacao').first()
     
     
 # choices → define opções fixas para um campo
@@ -44,11 +43,22 @@ class Filme(models.Model):
     categoria = models.CharField(max_length=20,choices=LISTA_CATEGORIAS)
     visualizacoes = models.IntegerField(default=0)
     data_criacao = models.DateTimeField(default=timezone.now)  # Define a data na criação e permite alteração manual depois
+    destaque = models.BooleanField(default=False,help_text='Marque como destaque para exibir o destaque no homepage')
 
     objects = FilmeManager()
 
     def __str__(self):
         return self.titulo
+    
+    def save(self, *args, **kwargs):
+        """
+        Garantir que apenas um filme seja destaque.
+        Se este filme for marcado como destaque, desmarque os outros.
+        """
+        if self.destaque:
+            Filme.objects.exclude(pk=self.pk).update(destaque=False)
+
+        return super().save(*args, **kwargs)
 
 
 class Episodio(models.Model):
