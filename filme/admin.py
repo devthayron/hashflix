@@ -7,6 +7,7 @@ class FilmeAdmin(admin.ModelAdmin):
     list_filter = ('categoria',)
     search_fields = ('titulo',)
     ordering = ('-visualizacoes',)
+    readonly_fields = ('visualizacoes',)
 
 @admin.register(Episodio)
 class EpisodioAdmin(admin.ModelAdmin):

@@ -54,3 +54,15 @@ class FilmeDetailView(DetailView):
 
         return context
 
+class FilmeSearchView(ListView):
+    template_name = 'filmes/search.html'
+    model = Filme
+    context_object_name = 'filmes'
+
+    def get_queryset(self):
+        pesquisa = self.request.GET.get('q')
+        if pesquisa:
+            filmes_filtrados = self.model.objects.filter(titulo__icontains=pesquisa)
+            return filmes_filtrados
+        else:
+            return None
