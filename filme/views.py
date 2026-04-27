@@ -1,5 +1,6 @@
 from .models import Filme
 from django.views.generic import TemplateView,ListView,DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class HomePageView(TemplateView):
     template_name = 'filmes/homepage.html'
@@ -28,20 +29,25 @@ class FilmeListView(ListView):
 
         return context
 
-class FilmeDetailView(DetailView):
+class FilmeDetailView(LoginRequiredMixin, DetailView):
 
     template_name = 'filmes/detail.html'
     model = Filme       
     context_object_name = 'filme'
 
-    def get_object(self, queryset = None):
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)  
         """
         Incrementa visualizações sempre que o filme é acessado.
+        E adiciona o filme à lista de vistos do usuário.
         """
-        filme = super().get_object(queryset)
-        Filme.objects.incrementar_visualizacoes(filme.pk)
-  
-        return filme
+        filme = self.object # filme atual
+        Filme.objects.incrementar_visualizacoes(filme.pk) # Incrementa visualizações do filme
+
+        usuario = self.request.user
+        usuario.filmes_vistos.add(filme)  # Adiciona o filme à lista de vistos do usuário
+
+        return response
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
