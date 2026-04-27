@@ -60,9 +60,11 @@ class FilmeSearchView(ListView):
     context_object_name = 'filmes'
 
     def get_queryset(self):
-        pesquisa = self.request.GET.get('q')
+        # nome 'q' é definido no "name" do input de pesquisa
+        pesquisa = self.request.GET.get('q','').strip()
+        queryset = self.model.objects.all()
+
         if pesquisa:
-            filmes_filtrados = self.model.objects.filter(titulo__icontains=pesquisa)
-            return filmes_filtrados
-        else:
-            return None
+            return queryset.filter(titulo__icontains=pesquisa)
+        
+        return queryset
