@@ -9,7 +9,6 @@ class FilmeListView(ListView):
     model = Filme
     context_object_name = 'filmes'
 
-
     # otimização para evitar consultas adicionais ao acessar os episódios de cada filme
     def get_queryset(self):
         return Filme.objects.prefetch_related('episodios')
