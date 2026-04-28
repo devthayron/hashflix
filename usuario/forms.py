@@ -9,4 +9,3 @@ class CustomUserCreationForm(UserCreationForm):
         model = Usuario
         fields = ('username', 'email', 'password1', 'password2')
     
-    

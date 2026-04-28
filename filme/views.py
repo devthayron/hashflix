@@ -1,11 +1,15 @@
 from .models import Filme
-from django.views.generic import TemplateView,ListView,DetailView
+from usuario.models import Usuario
+from django.views.generic import ListView,DetailView,FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from .forms import FormHomePageView
 
-class HomePageView(TemplateView):
+
+class HomePageView(FormView):
     template_name = 'filmes/homepage.html'
+    form_class = FormHomePageView
     redirect_url = reverse_lazy('filmes:list')
     
     def dispatch(self, request, *args, **kwargs):
@@ -13,6 +17,16 @@ class HomePageView(TemplateView):
             return redirect(self.redirect_url)
         return super().dispatch(request, *args, **kwargs)
 
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+
+        usuario = Usuario.objects.filter(email=email).first()
+
+        if usuario:
+            return redirect('usuarios:login')
+        
+        return redirect('usuarios:register')
+ 
 
 class FilmeListView(LoginRequiredMixin, ListView):
     template_name = 'filmes/list.html'
