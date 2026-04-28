@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'filme',
     'usuario',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +132,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Authentication settings
 LOGIN_URL = 'usuarios:login'                     # Página de login
 LOGIN_REDIRECT_URL = 'filmes:list'               # Redireciona para a lista de filmes após login bem-sucedido
-LOGOUT_REDIRECT_URL = 'usuarios:login'           # Redireciona para a página de login após logout
+LOGOUT_REDIRECT_URL = 'usuarios:logout'           # Redireciona para a página de logout após logout
+
+
+# Configurações do Crispy Forms para usar o Bootstrap 5
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
