@@ -128,6 +128,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Authentication settings
+LOGIN_URL = 'usuarios:login'                     # Página de login
 LOGIN_REDIRECT_URL = 'filmes:list'               # Redireciona para a lista de filmes após login bem-sucedido
 LOGOUT_REDIRECT_URL = 'usuarios:login'           # Redireciona para a página de login após logout
-LOGIN_URL = 'usuarios:login'                     # Página de login
