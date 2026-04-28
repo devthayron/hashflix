@@ -28,7 +28,7 @@ class FilmeManager(models.Manager):
         Se eu n definir o destaque manualmente,
         o filme mais recente será escolhido como destaque.
 
-        obs. Ainda constará desmarcado o destaque
+        obs. Ainda constará desmarcado o destaque, mas será exibido como destaque.
         """
         destaque = (self.filter(destaque=True)
         .order_by('-data_criacao')

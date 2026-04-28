@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class HomePageView(TemplateView):
     template_name = 'filmes/homepage.html'
 
-class FilmeListView(ListView):
+class FilmeListView(LoginRequiredMixin, ListView):
     template_name = 'filmes/list.html'
     model = Filme
     context_object_name = 'filmes'
@@ -59,7 +59,7 @@ class FilmeDetailView(LoginRequiredMixin, DetailView):
 
         return context
 
-class FilmeSearchView(ListView):
+class FilmeSearchView(LoginRequiredMixin, ListView):
     template_name = 'filmes/search.html'
     model = Filme
     context_object_name = 'filmes'

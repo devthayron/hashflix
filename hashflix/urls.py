@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('filme.urls'))
+    path('', include('filme.urls')),
+    path('usuarios/', include('usuario.urls')),  
 
 ]
 # configuração de media files e static files
