@@ -1,9 +1,14 @@
 from .models import Filme
 from django.views.generic import TemplateView,ListView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 
 class HomePageView(TemplateView):
     template_name = 'filmes/homepage.html'
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('filmes:list')
+        return super().get(request, *args, **kwargs)
 
 class FilmeListView(LoginRequiredMixin, ListView):
     template_name = 'filmes/list.html'
