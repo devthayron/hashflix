@@ -2,13 +2,17 @@ from .models import Filme
 from django.views.generic import TemplateView,ListView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
 class HomePageView(TemplateView):
     template_name = 'filmes/homepage.html'
-    def get(self, request, *args, **kwargs):
+    redirect_url = reverse_lazy('filmes:list')
+    
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('filmes:list')
-        return super().get(request, *args, **kwargs)
+            return redirect(self.redirect_url)
+        return super().dispatch(request, *args, **kwargs)
+
 
 class FilmeListView(LoginRequiredMixin, ListView):
     template_name = 'filmes/list.html'
@@ -33,6 +37,7 @@ class FilmeListView(LoginRequiredMixin, ListView):
         })
 
         return context
+
 
 class FilmeDetailView(LoginRequiredMixin, DetailView):
 
@@ -63,6 +68,7 @@ class FilmeDetailView(LoginRequiredMixin, DetailView):
         })
 
         return context
+
 
 class FilmeSearchView(LoginRequiredMixin, ListView):
     template_name = 'filmes/search.html'
