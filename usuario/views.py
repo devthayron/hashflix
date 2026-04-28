@@ -5,6 +5,6 @@ from .models import Usuario
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'usuarios/profile.html'
 
-class ProfileCreateView(TemplateView):
-    template_name = 'usuarios/profile_create.html'
+class RegisterView(TemplateView):
+    template_name = 'usuarios/register.html'
   
